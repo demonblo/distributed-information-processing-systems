@@ -4,7 +4,6 @@ spring:
     username: program
     password: UHLUO401j4SorZ8bmAz19dQn2TriKhsc
     url: jdbc:postgresql://dpg-cke0nptjhfbs73du4p2g-a.frankfurt-postgres.render.com/persons_i9j5
-    #External postgres://program:UHLUO401j4SorZ8bmAz19dQn2TriKhsc@dpg-cke0nptjhfbs73du4p2g-a.frankfurt-postgres.render.com/persons_i9j5
   jpa:
     properties:
       hibernate:
@@ -12,3 +11,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+
+
+
+#External postgres://program:UHLUO401j4SorZ8bmAz19dQn2TriKhsc@dpg-cke0nptjhfbs73du4p2g-a.frankfurt-postgres.render.com/persons_i9j5
