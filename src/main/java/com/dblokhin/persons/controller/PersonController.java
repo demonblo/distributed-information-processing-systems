@@ -8,6 +8,7 @@ import com.dblokhin.persons.model.ValidationErrorResponse;
 import com.dblokhin.persons.service.PersonService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -50,9 +53,22 @@ public class PersonController {
             }
     )
 
-    @GetMapping(value = "/id", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonResponse getPerson(@PathVariable Integer id) {
         return personService.getPerson(id);
+    }
+
+    @Operation(
+            summary = "Get all persons",
+            responses = @ApiResponse(
+                    responseCode = "200",
+                    description = "List all persons",
+                    content = { @Content(array = @ArraySchema(schema = @Schema(implementation = PersonResponse.class))) }
+            )
+    )
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<PersonResponse> listPersons() {
+        return personService.getPersons();
     }
 
     @Operation(
